@@ -1,0 +1,12 @@
+
+### ========= Get User =========
+GET http://localhost:5001/users
+
+### ========= Creat Users =========
+POST http://localhost:5001/users/create
+Content-Type: application/json
+
+{
+  "id": "1",
+  "name": "asd"
+}
