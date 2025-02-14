@@ -10,3 +10,8 @@ Content-Type: application/json
   "id": "1",
   "name": "asd"
 }
+
+
+#### Get users by id
+
+GET http://localhost:5001/users/2
