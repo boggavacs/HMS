@@ -1,17 +1,18 @@
-import { Controller, Get, Post, Body, Param } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Inject, HttpException, HttpStatus } from '@nestjs/common';
+import { UsersService } from './users.service';
 import { CreateUserDto } from './user.dto';
 
 @Controller('users')
 export class UsersController {
+    constructor(public userService: UsersService) {}
 
     @Get()
     listUsers() {
-        return [
-            {
-                id: 1,
-                name: 'John Doe',
-            },
-        ]
+        try {
+            return this.userService.getAllUsers();
+        } catch (error) {
+            throw new HttpException('Error fetching users', HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @Post('/create')
@@ -24,12 +25,6 @@ export class UsersController {
             password: body.password,
         }
     }
-
-    // @Post('/:id')
-    // updateUser() {}
-
-    // @Post('/:id')
-    // deleteUser() {}
 
     @Get('/:id')
     getUserById(@Param('id') id: string) {
