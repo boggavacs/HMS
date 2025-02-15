@@ -1,4 +1,4 @@
-import { Controller, Get, Request, Response } from '@nestjs/common';
+import { Controller, Get, HttpException, HttpStatus } from '@nestjs/common';
 import { HealthCheck, ApplicationInformation, APPLICATION} from './appModel';
 import { ApplicationInfo } from './appModel';
 import { ConfigService } from '@nestjs/config';
@@ -17,7 +17,7 @@ export class AppController {
     }
 
     @Get('/health') 
-    checkApplicationHealth(): HealthCheck {
+    checkApplicationHealth(){
         return this.applicationInfo.healthCheck<HealthCheck>({
             status: 'UP',
             message: 'Application is running'
@@ -26,10 +26,14 @@ export class AppController {
 
     @Get('/info')
     getInfo(){
-        return this.applicationInfo.getApplicationInfo<ApplicationInformation>({
+        try {
+            return this.applicationInfo.getApplicationInfo<ApplicationInformation>({
             name: APPLICATION.LONG_NAME,
             description: 'Hiring management system',
             version: '1.0.0'
-        });
+            });
+        } catch (error) {
+            throw new HttpException('Failed to get application info', HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 }
