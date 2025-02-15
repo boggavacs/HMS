@@ -1,5 +1,6 @@
 import { Controller, Get, Request, Response } from '@nestjs/common';
-import { HealthCheck, Info, APPLICATION } from './appModel';
+import { HealthCheck, ApplicationInformation, APPLICATION} from './appModel';
+import { ApplicationInfo } from './appModel';
 import { ConfigService } from '@nestjs/config';
 
 
@@ -7,25 +8,28 @@ import { ConfigService } from '@nestjs/config';
 export class AppController {
     appShortName = ''; 
 
-    constructor(private configService: ConfigService) {
+    constructor(
+        private configService: ConfigService, 
+        private applicationInfo: ApplicationInfo) 
+    {
         this.appShortName = this.configService.get<string>('APP_SHORT_NAME') || '';
         console.log('App short name:', this.appShortName);
     }
 
     @Get('/health') 
     checkApplicationHealth(): HealthCheck {
-        return {
+        return this.applicationInfo.healthCheck<HealthCheck>({
             status: 'UP',
             message: 'Application is running'
-        }
+        });
     }
 
     @Get('/info')
-    getInfo(): Info {
-        return {
-            name: 'Hiring Management System',
+    getInfo(){
+        return this.applicationInfo.getApplicationInfo<ApplicationInformation>({
+            name: APPLICATION.LONG_NAME,
             description: 'Hiring management system',
             version: '1.0.0'
-        }
+        });
     }
 }
