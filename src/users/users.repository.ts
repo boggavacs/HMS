@@ -1,4 +1,4 @@
-import { readFile } from "node:fs/promises";
+import { readFile, writeFile } from "node:fs/promises";
 import { join } from "path";
 import { HttpException, HttpStatus, Injectable } from "@nestjs/common";
 
@@ -22,6 +22,13 @@ export class UsersReposiroty {
     }
 
     async createUser(user: any) {
-        console.log('createUser');
+        const users = await readFile(this.filePath, 'utf-8');
+        const usersJson = JSON.parse(users);
+        const newUser: any = {}; // Declare the newUser variable
+        newUser.id = Math.floor(Math.random() * 1000);
+        newUser.name = user.name; // Use the 'user' parameter instead of 'newUser.name'
+        usersJson.push(newUser);
+        await writeFile(this.filePath, JSON.stringify(usersJson));
+        return newUser;
     }
 }
