@@ -4,7 +4,8 @@ import { CreateUserDto } from './user.dto';
 
 @Controller('users')
 export class UsersController {
-    constructor(public userService: UsersService) {}
+    constructor(public userService: UsersService,
+    ) {}
 
     @Get()
     listUsers() {
@@ -18,12 +19,13 @@ export class UsersController {
     @Post('/create')
     createUser(@Body() body: CreateUserDto) {
         const user = body;
-        return {
-            id: 1,
-            name: body.name,
-            email: body.email,
-            password: body.password,
-        }
+        this.userService.createUser<CreateUserDto>(user);
+        // return {
+        //     id: 1,
+        //     name: body.name,
+        //     email: body.email,
+        //     password: body.password,
+        // }
     }
 
     @Get('/:id')

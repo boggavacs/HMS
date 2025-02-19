@@ -4,7 +4,9 @@ import { UsersReposiroty } from './users.repository';
 @Injectable()
 export class UsersService {
 
-    constructor(public userRepository: UsersReposiroty) { }
+    constructor(
+        public userRepository: UsersReposiroty,
+    ) { }
 
     getAllUsers() {
         return this.userRepository.getAllUsers();
@@ -14,8 +16,13 @@ export class UsersService {
         return name
     }
 
-    getApplicationInfo<T>(ApplicationInfo: T): T {
-        return ApplicationInfo
+    createUser<T>(user: T): Promise<T> {
+        return this.userRepository.createUser(user);
+        // this.userRepository.createUser({
+        //     id: 1,
+        //     name: "John Doe",
+        //     email: "test@test.com",
+        // });
     }
 
 }
