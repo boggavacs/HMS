@@ -3,13 +3,13 @@
 GET http://localhost:5001/users
 
 ### ========= Creat Users =========
-POST http://localhost:5001/users/create
+POST http://localhost:5001/users/signup
 Content-Type: application/json
 
 {
   "id": "1",
   "name": "user123",
-  "email": "test@test.com",
+  "email": "test@test.c",
   "password": "12345678"
 }
 
