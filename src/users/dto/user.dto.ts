@@ -1,7 +1,10 @@
-import { IsString, IsEmail, IsNotEmpty } from 'class-validator';
+import { IsString, IsEmail, IsNotEmpty,  } from 'class-validator';
 import exp from 'constants';
 
 class userDto {
+
+    @IsNotEmpty()
+    id: number;
 
     @IsString()
     @IsNotEmpty()
