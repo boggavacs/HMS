@@ -21,4 +21,12 @@ export class UsersService {
     async findOne(id: number) {
         return await this.usersRepository.findOneBy({ id });
     }
+
+    async updateUser(id:number, user: Partial<User>) {
+        const userToUpdate = await this.usersRepository.findOneBy({ id });
+        if (!userToUpdate) {
+            throw new Error('User not found');
+        }
+        return await this.usersRepository.save(Object.assign(userToUpdate, user));
+    }
 }

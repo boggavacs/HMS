@@ -9,8 +9,7 @@ POST http://localhost:5001/users/signup
 Content-Type: application/json
 
 {
-  "id": "4",
-  "name": "clari",
+  "name": "Beauty",
   "email": "clair@hms.com",
   "password": "1234567890"
 }
@@ -19,3 +18,11 @@ Content-Type: application/json
 #### Get users by id
 
 GET http://localhost:5001/users/4
+
+### ========= Update Users =========
+POST http://localhost:5001/users/2
+Content-Type: application/json
+
+{
+  "email": "twa@hms.com"
+}
