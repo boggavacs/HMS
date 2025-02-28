@@ -1,19 +1,29 @@
 
-### ========= Get User =========
+### ========= Get All Users =========
 GET http://localhost:5001/users
 
+
+
 ### ========= Creat Users =========
-POST http://localhost:5001/users/create
+POST http://localhost:5001/users/signup
 Content-Type: application/json
 
 {
-  "id": "1",
-  "name": "user123",
-  "email": "test@test.com",
-  "password": "12345678"
+  "id": 1,
+  "name": "Beauty",
+  "email": "clair@hms.com",
+  "password": "1234567890"
 }
 
 
 #### Get users by id
 
-GET http://localhost:5001/users/2
+GET http://localhost:5001/users/4
+
+### ========= Update Users =========
+POST http://localhost:5001/users/1
+Content-Type: application/json
+
+{
+  "email": "twa@hms.com"
+}

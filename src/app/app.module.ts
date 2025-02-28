@@ -5,6 +5,8 @@ import { ApplicationInfo } from './appModel';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import User from '../users/user.entity';
 import { Reports } from 'src/reports/reports.entity';
+import { UsersModule } from 'src/users/users.module';
+import { ReportsModule } from 'src/reports/reports.module';
 
 @Module({
   controllers: [AppController],
@@ -18,6 +20,8 @@ import { Reports } from 'src/reports/reports.entity';
         synchronize: true,
       }
     ),
+    UsersModule,
+    ReportsModule
   ],
   providers: [ApplicationInfo],
 })
