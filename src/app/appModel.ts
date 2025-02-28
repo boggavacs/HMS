@@ -12,10 +12,27 @@ interface HealthCheck extends AppModel {
     message: string;
 }
 
-interface Info extends AppModel {
+interface ApplicationInformation extends AppModel {
     name: string;
     description: string;
     version: string;
 }
 
-export { AppModel, HealthCheck, Info, APPLICATION };
+export class ApplicationInfo {
+
+    getApplicationInfo<T>(ApplicationInfo: T): T {
+        return ApplicationInfo
+
+    }
+
+    healthCheck<T>(healthCheck: T): T{
+        return healthCheck
+    }
+
+    getApplicationShortName<T>(ApplicationShortName: T): T {
+        return ApplicationShortName
+    }
+        
+}
+
+export { AppModel, HealthCheck, ApplicationInformation, APPLICATION };
