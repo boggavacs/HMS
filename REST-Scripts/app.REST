@@ -1,5 +1,0 @@
-GET http://localhost:5001/hms/health
-
-###
-
-GET http://localhost:5001/hms/info
